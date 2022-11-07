@@ -1,0 +1,5 @@
+{
+  "output": "generated/sample.",
+  "chain": "mainnet",
+  "datasources": [{ "address": "0xA447EBe77678C6090935d00196f6D2b506c88c30", "startBlock": 1958280, "module": ["erc20"] }]
+}
