@@ -1,0 +1,13 @@
+type ClaimTokens @entity {
+    id: ID!
+    businessAction: String!
+    dayId: String!
+    monthId: String!
+    yearId: String!
+    mainActor: String!
+    amount: BigInt!
+    invoiceLink: String!
+    workArea: String!
+    country: String!
+    block: BigInt!
+}

@@ -1,7 +1,7 @@
 specVersion: 0.0.2
 description: Moonbase subgrapg of LB Token project
 schema:
-  file: schema.graphql
+  file: ./schema.graphql
 dataSources:
   - kind: ethereum
     name: Contract
@@ -18,9 +18,8 @@ dataSources:
         - ClaimTokens
       abis:
         - name: Contract
-          file: Contract/abis/Contract.json
+          file: ./abis/Contract.json
       eventHandlers:
-        - event: BusinessAction(uint8,indexed uint8,indexed uint8,indexed
-            uint16,address,uint256,string,string,string)
+        - event: BusinessAction(uint8,indexed uint8,indexed uint8,indexed uint16,address,uint256,string,string,string)
           handler: handleBusinessAction
-      file: Contract/Contract.wasm
+      file: ./src/mapping.ts
