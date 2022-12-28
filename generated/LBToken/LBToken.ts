@@ -290,7 +290,7 @@ export class Unpaused__Params {
   }
 }
 
-export class Contract__userIdsResult {
+export class LBToken__userIdsResult {
   value0: BigInt;
   value1: boolean;
 
@@ -307,9 +307,9 @@ export class Contract__userIdsResult {
   }
 }
 
-export class Contract extends ethereum.SmartContract {
-  static bind(address: Address): Contract {
-    return new Contract("Contract", address);
+export class LBToken extends ethereum.SmartContract {
+  static bind(address: Address): LBToken {
+    return new LBToken("LBToken", address);
   }
 
   LAST_UNIX_EPOCH(): BigInt {
@@ -828,18 +828,18 @@ export class Contract extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  userIds(param0: Address): Contract__userIdsResult {
+  userIds(param0: Address): LBToken__userIdsResult {
     let result = super.call("userIds", "userIds(address):(uint256,bool)", [
       ethereum.Value.fromAddress(param0)
     ]);
 
-    return new Contract__userIdsResult(
+    return new LBToken__userIdsResult(
       result[0].toBigInt(),
       result[1].toBoolean()
     );
   }
 
-  try_userIds(param0: Address): ethereum.CallResult<Contract__userIdsResult> {
+  try_userIds(param0: Address): ethereum.CallResult<LBToken__userIdsResult> {
     let result = super.tryCall("userIds", "userIds(address):(uint256,bool)", [
       ethereum.Value.fromAddress(param0)
     ]);
@@ -848,7 +848,7 @@ export class Contract extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Contract__userIdsResult(value[0].toBigInt(), value[1].toBoolean())
+      new LBToken__userIdsResult(value[0].toBigInt(), value[1].toBoolean())
     );
   }
 }

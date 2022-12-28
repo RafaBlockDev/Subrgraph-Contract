@@ -1,13 +1,24 @@
-type ClaimTokens @entity {
-    id: ID!
-    businessAction: String!
-    dayId: String!
-    monthId: String!
-    yearId: String!
-    mainActor: String!
-    amount: BigInt!
-    invoiceLink: String!
-    workArea: String!
-    country: String!
-    block: BigInt!
+type ClaimToken @entity {
+  id: ID!
+  dayId: String!
+  monthId: String!
+  yearId: String!
+  amountToBeTransfer: BigInt!
+  user: Bytes
+  block: BigInt!
+  payment: PaymentSubmited
 }
+
+type PaymentSubmited @entity {
+  id: ID!
+  REQUEST_REFUND: String!
+  dayId: String!
+  monthId: String!
+  yearId: String!
+  from: Bytes
+  amount: BigInt!
+  employeeId: String!
+  invoiceLink: String!
+  timestamp: BigInt!
+  claims: ClaimToken
+} 

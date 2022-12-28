@@ -65,20 +65,14 @@
       },
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "employeeId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
         "internalType": "string",
         "name": "invoiceLink",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "workArea",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "country",
         "type": "string"
       }
     ],
@@ -117,18 +111,6 @@
         "internalType": "address",
         "name": "from",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "workArea",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "country",
-        "type": "string"
       }
     ],
     "name": "ClaimTokens",
@@ -217,18 +199,6 @@
         "internalType": "string",
         "name": "invoiceLink",
         "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "workArea",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "country",
-        "type": "string"
       }
     ],
     "name": "PaymentSubmited",
@@ -266,18 +236,6 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "workArea",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "country",
-        "type": "string"
       }
     ],
     "name": "RefundedToken",
@@ -323,7 +281,33 @@
   },
   {
     "inputs": [],
+    "name": "LAST_UNIX_EPOCH",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "MANAGER_ADDRESS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "RELAYER",
     "outputs": [
       {
         "internalType": "address",
@@ -464,14 +448,9 @@
         "type": "uint16"
       },
       {
-        "internalType": "string",
-        "name": "workArea",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "country",
-        "type": "string"
+        "internalType": "uint256",
+        "name": "employeeId",
+        "type": "uint256"
       }
     ],
     "name": "claimTokens",
@@ -598,16 +577,6 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "workArea",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "country",
-        "type": "string"
       }
     ],
     "name": "markAsRefunded",
@@ -757,16 +726,6 @@
         "internalType": "string",
         "name": "invoiceLink",
         "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "workArea",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "country",
-        "type": "string"
       }
     ],
     "name": "submitPayment",
@@ -883,6 +842,30 @@
     "name": "updateUnixEpoch",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "userIds",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isValue",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   }
 ]

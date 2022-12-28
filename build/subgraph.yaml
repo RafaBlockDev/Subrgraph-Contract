@@ -1,5 +1,4 @@
 specVersion: 0.0.2
-description: Moonbase subgrapg of LB Token project
 schema:
   file: schema.graphql
 dataSources:
@@ -7,20 +6,23 @@ dataSources:
     name: Contract
     network: mbase
     source:
-      address: "0xF88134E98D4C3E34911698Ef2c7c81Ca916d7bC1"
+      address: "0xb16C243e3A63172E8016Db3C5E8b4eD8d700A7CF"
       abi: Contract
-      startBlock: 29055213
+      startBlock: 3226845
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - ClaimTokens
+        - PaymentSubmited
       abis:
         - name: Contract
           file: Contract/abis/Contract.json
       eventHandlers:
+        - event: ClaimTokens(indexed uint8,indexed uint8,indexed uint16,uint256,address)
+          handler: handleClaimTokens
         - event: BusinessAction(uint8,indexed uint8,indexed uint8,indexed
-            uint16,address,uint256,string,string,string)
-          handler: handleBusinessAction
+            uint16,address,uint256,uint256,string)
+          handler: handlePaymentSubmited
       file: Contract/Contract.wasm

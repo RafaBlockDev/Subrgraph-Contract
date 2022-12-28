@@ -11,38 +11,33 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ClaimTokens extends Entity {
+export class ClaimToken extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("businessAction", Value.fromString(""));
     this.set("dayId", Value.fromString(""));
     this.set("monthId", Value.fromString(""));
     this.set("yearId", Value.fromString(""));
-    this.set("mainActor", Value.fromString(""));
-    this.set("amount", Value.fromBigInt(BigInt.zero()));
-    this.set("invoiceLink", Value.fromString(""));
-    this.set("workArea", Value.fromString(""));
-    this.set("country", Value.fromString(""));
+    this.set("amountToBeTransfer", Value.fromBigInt(BigInt.zero()));
     this.set("block", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ClaimTokens entity without an ID");
+    assert(id != null, "Cannot save ClaimToken entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save ClaimTokens entity with non-string ID. " +
+        "Cannot save ClaimToken entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("ClaimTokens", id.toString(), this);
+      store.set("ClaimToken", id.toString(), this);
     }
   }
 
-  static load(id: string): ClaimTokens | null {
-    return changetype<ClaimTokens | null>(store.get("ClaimTokens", id));
+  static load(id: string): ClaimToken | null {
+    return changetype<ClaimToken | null>(store.get("ClaimToken", id));
   }
 
   get id(): string {
@@ -52,15 +47,6 @@ export class ClaimTokens extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get businessAction(): string {
-    let value = this.get("businessAction");
-    return value!.toString();
-  }
-
-  set businessAction(value: string) {
-    this.set("businessAction", Value.fromString(value));
   }
 
   get dayId(): string {
@@ -90,13 +76,151 @@ export class ClaimTokens extends Entity {
     this.set("yearId", Value.fromString(value));
   }
 
-  get mainActor(): string {
-    let value = this.get("mainActor");
+  get amountToBeTransfer(): BigInt {
+    let value = this.get("amountToBeTransfer");
+    return value!.toBigInt();
+  }
+
+  set amountToBeTransfer(value: BigInt) {
+    this.set("amountToBeTransfer", Value.fromBigInt(value));
+  }
+
+  get user(): Bytes | null {
+    let value = this.get("user");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set user(value: Bytes | null) {
+    if (!value) {
+      this.unset("user");
+    } else {
+      this.set("user", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get block(): BigInt {
+    let value = this.get("block");
+    return value!.toBigInt();
+  }
+
+  set block(value: BigInt) {
+    this.set("block", Value.fromBigInt(value));
+  }
+
+  get payment(): string | null {
+    let value = this.get("payment");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set payment(value: string | null) {
+    if (!value) {
+      this.unset("payment");
+    } else {
+      this.set("payment", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class PaymentSubmited extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("REQUEST_REFUND", Value.fromString(""));
+    this.set("dayId", Value.fromString(""));
+    this.set("monthId", Value.fromString(""));
+    this.set("yearId", Value.fromString(""));
+    this.set("amount", Value.fromBigInt(BigInt.zero()));
+    this.set("employeeId", Value.fromString(""));
+    this.set("invoiceLink", Value.fromString(""));
+    this.set("timestamp", Value.fromBigInt(BigInt.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save PaymentSubmited entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save PaymentSubmited entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("PaymentSubmited", id.toString(), this);
+    }
+  }
+
+  static load(id: string): PaymentSubmited | null {
+    return changetype<PaymentSubmited | null>(store.get("PaymentSubmited", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
     return value!.toString();
   }
 
-  set mainActor(value: string) {
-    this.set("mainActor", Value.fromString(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get REQUEST_REFUND(): string {
+    let value = this.get("REQUEST_REFUND");
+    return value!.toString();
+  }
+
+  set REQUEST_REFUND(value: string) {
+    this.set("REQUEST_REFUND", Value.fromString(value));
+  }
+
+  get dayId(): string {
+    let value = this.get("dayId");
+    return value!.toString();
+  }
+
+  set dayId(value: string) {
+    this.set("dayId", Value.fromString(value));
+  }
+
+  get monthId(): string {
+    let value = this.get("monthId");
+    return value!.toString();
+  }
+
+  set monthId(value: string) {
+    this.set("monthId", Value.fromString(value));
+  }
+
+  get yearId(): string {
+    let value = this.get("yearId");
+    return value!.toString();
+  }
+
+  set yearId(value: string) {
+    this.set("yearId", Value.fromString(value));
+  }
+
+  get from(): Bytes | null {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes | null) {
+    if (!value) {
+      this.unset("from");
+    } else {
+      this.set("from", Value.fromBytes(<Bytes>value));
+    }
   }
 
   get amount(): BigInt {
@@ -108,6 +232,15 @@ export class ClaimTokens extends Entity {
     this.set("amount", Value.fromBigInt(value));
   }
 
+  get employeeId(): string {
+    let value = this.get("employeeId");
+    return value!.toString();
+  }
+
+  set employeeId(value: string) {
+    this.set("employeeId", Value.fromString(value));
+  }
+
   get invoiceLink(): string {
     let value = this.get("invoiceLink");
     return value!.toString();
@@ -117,30 +250,29 @@ export class ClaimTokens extends Entity {
     this.set("invoiceLink", Value.fromString(value));
   }
 
-  get workArea(): string {
-    let value = this.get("workArea");
-    return value!.toString();
-  }
-
-  set workArea(value: string) {
-    this.set("workArea", Value.fromString(value));
-  }
-
-  get country(): string {
-    let value = this.get("country");
-    return value!.toString();
-  }
-
-  set country(value: string) {
-    this.set("country", Value.fromString(value));
-  }
-
-  get block(): BigInt {
-    let value = this.get("block");
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
     return value!.toBigInt();
   }
 
-  set block(value: BigInt) {
-    this.set("block", Value.fromBigInt(value));
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get claims(): string | null {
+    let value = this.get("claims");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set claims(value: string | null) {
+    if (!value) {
+      this.unset("claims");
+    } else {
+      this.set("claims", Value.fromString(<string>value));
+    }
   }
 }
